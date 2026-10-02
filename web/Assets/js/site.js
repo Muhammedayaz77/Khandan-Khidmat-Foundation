@@ -1,18 +1,68 @@
 const THEME_KEY='kkf_theme';
-function applyTheme(theme){document.documentElement.classList.toggle('dark',theme==='dark');localStorage.setItem(THEME_KEY,theme);const b=document.getElementById('themeToggle');if(b)b.textContent=theme==='dark'?'☀ Light':'☾ Dark';}
+const LANG_KEY='kkf_language';
+
+const I18N={
+hi:{'Home':'होम','About':'हमारे बारे में','Committee':'समिति','Activities':'गतिविधियाँ','Documents':'दस्तावेज़','Contact':'संपर्क','Member Login':'सदस्य लॉगिन','Menu':'मेन्यू','Close':'बंद करें','Settings':'सेटिंग्स','Language':'भाषा','English':'अंग्रेज़ी','Hindi':'हिंदी','Marathi':'मराठी','Urdu':'उर्दू','Dark':'डार्क','Light':'लाइट','Community Welfare':'सामुदायिक कल्याण','Medical Support':'चिकित्सा सहायता','Service':'सेवा','Community Welfare · Medical Support · Service':'सामुदायिक कल्याण · चिकित्सा सहायता · सेवा','Organised Service':'संगठित सेवा','People first.':'लोग पहले।','Service always.':'सेवा हमेशा।','Our Activities':'हमारी गतिविधियाँ','Committee records':'समिति के रिकॉर्ड','Directors':'निदेशक','Members':'सदस्य','Foundation members':'फाउंडेशन के सदस्य','Committee directors':'समिति के निदेशक','President':'अध्यक्ष','Vice-President':'उपाध्यक्ष','Secretary':'सचिव','Joint Secretary':'संयुक्त सचिव','Cashier':'कोषाध्यक्ष','Joint Cashier':'संयुक्त कोषाध्यक्ष','Legal Advisor':'कानूनी सलाहकार','Learn more':'और जानें','Our activities':'हमारी गतिविधियाँ','View records':'रिकॉर्ड देखें','View committee details':'समिति का विवरण देखें','Explore documents':'दस्तावेज़ देखें','Contact us':'संपर्क करें','Explore our work':'हमारे कार्य देखें','Discover the mission':'मिशन जानें','Sign in':'साइन इन','Login':'लॉगिन','Sign up':'साइन अप','New Member':'नया सदस्य','Create account':'खाता बनाएँ','Full name':'पूरा नाम','Password':'पासवर्ड','Confirm password':'पासवर्ड की पुष्टि करें','Create Member Account':'सदस्य खाता बनाएँ','Public Website':'सार्वजनिक वेबसाइट','Member Area':'सदस्य क्षेत्र','Emergency Medical Help':'आपातकालीन चिकित्सा सहायता','Essential Assistance':'आवश्यक सहायता','Member Contributions':'सदस्य योगदान','Good service needs good records.':'अच्छी सेवा के लिए अच्छे रिकॉर्ड ज़रूरी हैं।'},
+mr:{'Home':'मुख्यपृष्ठ','About':'आमच्याबद्दल','Committee':'समिती','Activities':'उपक्रम','Documents':'कागदपत्रे','Contact':'संपर्क','Member Login':'सदस्य लॉगिन','Menu':'मेन्यू','Close':'बंद करा','Settings':'सेटिंग्ज','Language':'भाषा','English':'इंग्रजी','Hindi':'हिंदी','Marathi':'मराठी','Urdu':'उर्दू','Dark':'डार्क','Light':'लाइट','Community Welfare':'सामुदायिक कल्याण','Medical Support':'वैद्यकीय मदत','Service':'सेवा','Community Welfare · Medical Support · Service':'सामुदायिक कल्याण · वैद्यकीय मदत · सेवा','Organised Service':'संघटित सेवा','People first.':'लोक प्रथम.','Service always.':'सेवा नेहमी.','Our Activities':'आमचे उपक्रम','Committee records':'समितीचे नोंदी','Directors':'संचालक','Members':'सदस्य','Foundation members':'संस्थेचे सदस्य','Committee directors':'समितीचे संचालक','President':'अध्यक्ष','Vice-President':'उपाध्यक्ष','Secretary':'सचिव','Joint Secretary':'संयुक्त सचिव','Cashier':'खजिनदार','Joint Cashier':'संयुक्त खजिनदार','Legal Advisor':'कायदेशीर सल्लागार','Learn more':'अधिक जाणून घ्या','Our activities':'आमचे उपक्रम','View records':'नोंदी पहा','View committee details':'समितीचा तपशील पहा','Explore documents':'कागदपत्रे पहा','Contact us':'संपर्क करा','Explore our work':'आमचे कार्य पहा','Discover the mission':'उद्दिष्ट जाणून घ्या','Sign in':'साइन इन','Login':'लॉगिन','Sign up':'साइन अप','New Member':'नवीन सदस्य','Create account':'खाते तयार करा','Full name':'पूर्ण नाव','Password':'पासवर्ड','Confirm password':'पासवर्डची पुष्टी करा','Create Member Account':'सदस्य खाते तयार करा','Public Website':'सार्वजनिक वेबसाइट','Member Area':'सदस्य क्षेत्र','Emergency Medical Help':'आपत्कालीन वैद्यकीय मदत','Essential Assistance':'आवश्यक मदत','Member Contributions':'सदस्यांचे योगदान','Good service needs good records.':'चांगल्या सेवेसाठी चांगल्या नोंदी आवश्यक आहेत.'},
+ur:{'Home':'ہوم','About':'ہمارے بارے میں','Committee':'کمیٹی','Activities':'سرگرمیاں','Documents':'دستاویزات','Contact':'رابطہ','Member Login':'ممبر لاگ اِن','Menu':'مینو','Close':'بند کریں','Settings':'ترتیبات','Language':'زبان','English':'انگریزی','Hindi':'ہندی','Marathi':'مراٹھی','Urdu':'اردو','Dark':'ڈارک','Light':'لائٹ','Community Welfare':'برادری کی فلاح','Medical Support':'طبی مدد','Service':'خدمت','Community Welfare · Medical Support · Service':'برادری کی فلاح · طبی مدد · خدمت','Organised Service':'منظم خدمت','People first.':'لوگ سب سے پہلے۔','Service always.':'خدمت ہمیشہ۔','Our Activities':'ہماری سرگرمیاں','Committee records':'کمیٹی ریکارڈ','Directors':'ڈائریکٹرز','Members':'ممبران','Foundation members':'فاؤنڈیشن کے ممبران','Committee directors':'کمیٹی کے ڈائریکٹرز','President':'صدر','Vice-President':'نائب صدر','Secretary':'سیکریٹری','Joint Secretary':'جوائنٹ سیکریٹری','Cashier':'خزانچی','Joint Cashier':'جوائنٹ خزانچی','Legal Advisor':'قانونی مشیر','Learn more':'مزید جانیں','Our activities':'ہماری سرگرمیاں','View records':'ریکارڈ دیکھیں','View committee details':'کمیٹی کی تفصیل دیکھیں','Explore documents':'دستاویزات دیکھیں','Contact us':'رابطہ کریں','Explore our work':'ہمارا کام دیکھیں','Discover the mission':'مشن جانیں','Sign in':'سائن اِن','Login':'لاگ اِن','Sign up':'سائن اَپ','New Member':'نیا ممبر','Create account':'اکاؤنٹ بنائیں','Full name':'پورا نام','Password':'پاس ورڈ','Confirm password':'پاس ورڈ کی تصدیق کریں','Create Member Account':'ممبر اکاؤنٹ بنائیں','Public Website':'عوامی ویب سائٹ','Member Area':'ممبر ایریا','Emergency Medical Help':'ہنگامی طبی مدد','Essential Assistance':'ضروری مدد','Member Contributions':'ممبران کی شراکت','Good service needs good records.':'اچھی خدمت کے لیے اچھے ریکارڈ ضروری ہیں۔'}
+};
+
+function t(value){const lang=localStorage.getItem(LANG_KEY)||'en';return I18N[lang]?.[value]||value;}
+function applyTheme(theme){document.documentElement.classList.toggle('dark',theme==='dark');localStorage.setItem(THEME_KEY,theme);const b=document.getElementById('themeToggle');if(b)b.textContent=theme==='dark'?'☀ '+t('Light'):'☾ '+t('Dark');}
+
+function translateTitle(title,lang){
+ const map={hi:{'Committee | Khandan Khidmat Foundation':'समिति | खांदान खिदमत फाउंडेशन','Member / Manager Login | Khandan Khidmat Foundation':'सदस्य / मैनेजर लॉगिन | खांदान खिदमत फाउंडेशन'},mr:{'Committee | Khandan Khidmat Foundation':'समिती | खांदान खिदमत फाउंडेशन','Member / Manager Login | Khandan Khidmat Foundation':'सदस्य / मॅनेजर लॉगिन | खांदान खिदमत फाउंडेशन'},ur:{'Committee | Khandan Khidmat Foundation':'کمیٹی | خاندان خدمت فاؤنڈیشن','Member / Manager Login | Khandan Khidmat Foundation':'ممبر / مینیجر لاگ اِن | خاندان خدمت فاؤنڈیشن'}};
+ return map[lang]?.[title]||title;
+}
+
+function updateLanguageUI(lang){
+ const select=document.getElementById('languageSelect');if(select)select.value=lang;
+ const label=document.getElementById('languageLabel');if(label)label.textContent=t('Language');
+ const settings=document.getElementById('settingsToggle');if(settings)settings.textContent='⚙ '+t('Settings');
+ const menu=document.getElementById('menuToggle');if(menu&&!document.getElementById('siteNav')?.classList.contains('open'))menu.textContent='☰ '+t('Menu');
+}
+
+function translatePage(){
+ const lang=localStorage.getItem(LANG_KEY)||'en';
+ if(lang==='en'){document.documentElement.lang='en';document.documentElement.dir='ltr';updateLanguageUI(lang);return;}
+ const dict=I18N[lang]||{};
+ document.documentElement.lang=lang==='ur'?'ur':lang;
+ document.documentElement.dir=lang==='ur'?'rtl':'ltr';
+ const keys=Object.keys(dict).sort((a,b)=>b.length-a.length);
+ const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+ nodes.forEach(node=>{
+  if(node.parentElement?.closest('#languagePanel'))return;
+  let value=node.nodeValue;
+  keys.forEach(key=>{if(value.includes(key))value=value.split(key).join(dict[key]);});
+  node.nodeValue=value;
+ });
+ document.title=translateTitle(document.title,lang);
+ updateLanguageUI(lang);
+}
+
+function ensureSettings(){
+ const nav=document.getElementById('siteNav');if(!nav||document.getElementById('settingsToggle'))return;
+ const button=document.createElement('button');button.className='settings-toggle';button.id='settingsToggle';button.type='button';button.textContent='⚙ '+t('Settings');
+ const panel=document.createElement('div');panel.className='language-panel';panel.id='languagePanel';panel.hidden=true;
+ panel.innerHTML='<label id="languageLabel" for="languageSelect">'+t('Language')+'</label><select id="languageSelect"><option value="en">English</option><option value="hi">हिंदी</option><option value="mr">मराठी</option><option value="ur">اردو</option></select>';
+ button.addEventListener('click',()=>{panel.hidden=!panel.hidden;});
+ panel.querySelector('select').addEventListener('change',e=>{localStorage.setItem(LANG_KEY,e.target.value);location.reload();});
+ nav.appendChild(button);nav.appendChild(panel);
+}
+
 function initSite(){
+ ensureSettings();
  const saved=localStorage.getItem(THEME_KEY);applyTheme(saved==='dark'?'dark':'light');
+ translatePage();
  const toggle=document.getElementById('themeToggle');if(toggle)toggle.addEventListener('click',()=>applyTheme(document.documentElement.classList.contains('dark')?'light':'dark'));
  const menu=document.getElementById('menuToggle');const nav=document.getElementById('siteNav');
  if(menu&&nav){
-  menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'✕ Close':'☰ Menu';});
-  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='☰ Menu';}));
+  menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'✕ '+t('Close'):'☰ '+t('Menu');});
+  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='☰ '+t('Menu');}));
  }
  const links=[...document.querySelectorAll('#siteNav a[href^="#"]')];
  const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
- if(sections.length&&links.length){
-  const setActive=()=>{let current=sections[0].id;sections.forEach(s=>{if(window.scrollY+130>=s.offsetTop)current=s.id;});links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current));};
-  window.addEventListener('scroll',setActive,{passive:true});setActive();
- }
+ if(sections.length&&links.length){const setActive=()=>{let current=sections[0].id;sections.forEach(s=>{if(window.scrollY+130>=s.offsetTop)current=s.id;});links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current));};window.addEventListener('scroll',setActive,{passive:true});setActive();}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initSite);else initSite();
