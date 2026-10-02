@@ -1,209 +1,99 @@
-const THEME_KEY = 'kkf_theme';
-const LANG_KEY = 'kkf_language';
+const THEME_KEY='kkf_theme';
+const LANG_KEY='kkf_language';
 
-/* Khandan Khidmat Foundation — static-site language and theme controller. */
-const I18N = {
-  hi: {
+/* Khandan Khidmat Foundation — language, theme and menu controller. */
+const I18N={
+  hi:{
     'Home':'होम','About':'हमारे बारे में','Committee':'समिति','Activities':'गतिविधियाँ','Documents':'दस्तावेज़','Contact':'संपर्क','Member Login':'सदस्य लॉगिन','Menu':'मेन्यू','Close':'बंद करें','Settings':'सेटिंग्स','Language':'भाषा','English':'अंग्रेज़ी','Hindi':'हिंदी','Marathi':'मराठी','Urdu':'उर्दू','Dark':'डार्क','Light':'लाइट',
-    'Community Welfare':'सामुदायिक कल्याण','Medical Support':'चिकित्सा सहायता','Service':'सेवा','Community Welfare · Medical Support · Service':'सामुदायिक कल्याण · चिकित्सा सहायता · सेवा','Organised Service':'संगठित सेवा','People first.':'लोग पहले।','Service always.':'सेवा हमेशा।','Our Activities':'हमारी गतिविधियाँ','Our activities':'हमारी गतिविधियाँ','Committee records':'समिति के रिकॉर्ड','Directors':'निदेशक','Members':'सदस्य','Foundation members':'फाउंडेशन के सदस्य','Committee directors':'समिति के निदेशक','President':'अध्यक्ष','Vice-President':'उपाध्यक्ष','Secretary':'सचिव','Joint Secretary':'संयुक्त सचिव','Cashier':'कोषाध्यक्ष','Joint Cashier':'संयुक्त कोषाध्यक्ष','Legal Advisor':'कानूनी सलाहकार',
-    'Learn more':'और जानें','View records':'रिकॉर्ड देखें','View committee details':'समिति का विवरण देखें','Explore documents':'दस्तावेज़ देखें','Contact us':'संपर्क करें','Explore our work':'हमारे कार्य देखें','Discover the mission':'मिशन जानें','Sign in':'साइन इन','Login':'लॉगिन','Sign up':'साइन अप','New Member':'नया सदस्य','Create account':'खाता बनाएँ','Full name':'पूरा नाम','Password':'पासवर्ड','Confirm password':'पासवर्ड की पुष्टि करें','Create Member Account':'सदस्य खाता बनाएँ','Public Website':'सार्वजनिक वेबसाइट','Member Area':'सदस्य क्षेत्र',
-    'Emergency Medical Help':'आपातकालीन चिकित्सा सहायता','Essential Assistance':'आवश्यक सहायता','Member Contributions':'सदस्य योगदान','Good service needs good records.':'अच्छी सेवा के लिए अच्छे रिकॉर्ड ज़रूरी हैं।','Our focus':'हमारा फोकस','Our Focus':'हमारा फोकस','Purpose':'उद्देश्य','purpose.':'उद्देश्य।','Explore':'जानें','Support where it matters.':'जहाँ ज़रूरत हो वहाँ सहायता।','Serving people with compassion and responsibility.':'करुणा और जिम्मेदारी के साथ लोगों की सेवा।',
-    'Khandan Khidmat Foundation Mission brings members together to support poor, needy and medically distressed people through organised community welfare.':'खांदान खिदमत फाउंडेशन मिशन संगठित सामुदायिक कल्याण के माध्यम से गरीब, जरूरतमंद और चिकित्सकीय सहायता की आवश्यकता वाले लोगों की मदद के लिए सदस्यों को एक साथ लाता है।','The meeting records describe a practical model for helping members and people in need when circumstances require assistance.':'बैठक के रिकॉर्ड जरूरत पड़ने पर सदस्यों और जरूरतमंद लोगों की सहायता के लिए एक व्यावहारिक व्यवस्था बताते हैं।','Support may be considered for urgent medical treatment, emergency illness or related care.':'तत्काल चिकित्सा उपचार, आपातकालीन बीमारी या संबंधित देखभाल के लिए सहायता पर विचार किया जा सकता है।','Organised help for genuine hardship and situations where a person or family needs support.':'वास्तविक कठिनाई और ऐसी परिस्थितियों में संगठित सहायता जहाँ किसी व्यक्ति या परिवार को मदद की आवश्यकता हो।','Members contribute according to the committee’s agreed purpose.':'सदस्य समिति द्वारा तय उद्देश्य के अनुसार योगदान करते हैं।','Members contribute according to the committee\'s agreed purpose.':'सदस्य समिति द्वारा तय उद्देश्य के अनुसार योगदान करते हैं।',
-    'Leadership, approvals and overall committee responsibility.':'नेतृत्व, अनुमोदन और समिति की समग्र जिम्मेदारी।','Supports the President and committee operations.':'अध्यक्ष और समिति के कार्यों में सहयोग करता है।','Records, meetings, communication and administration.':'रिकॉर्ड, बैठकें, संचार और प्रशासन।','Financial records, collections and authorised payments.':'वित्तीय रिकॉर्ड, संग्रह और अधिकृत भुगतान।','Supports financial administration and records.':'वित्तीय प्रशासन और रिकॉर्ड में सहयोग करता है।','Legal guidance and committee matters.':'कानूनी मार्गदर्शन और समिति से जुड़े मामलों में सहायता।',
-    'Mission':'मिशन','Foundation Mission':'फाउंडेशन मिशन','About the foundation':'फाउंडेशन के बारे में','Our work':'हमारा कार्य','Our committee':'हमारी समिति','Our documents':'हमारे दस्तावेज़','Get in touch':'संपर्क करें','Contact information':'संपर्क जानकारी','Send us a message':'हमें संदेश भेजें','Name':'नाम','Email':'ईमेल','Message':'संदेश','Send message':'संदेश भेजें','Thank you':'धन्यवाद','Open member login →':'सदस्य लॉगिन खोलें →','Private information, simple access.':'निजी जानकारी, आसान पहुँच।','Members can optionally sign in to view their financial summary. Managers have separate access for authorised updates.':'सदस्य अपनी वित्तीय जानकारी देखने के लिए वैकल्पिक रूप से साइन इन कर सकते हैं। प्रबंधकों के पास अधिकृत अपडेट के लिए अलग पहुँच है।'
+    'Community Welfare · Medical Support · Service':'सामुदायिक कल्याण · चिकित्सा सहायता · सेवा','Community driven':'समुदाय द्वारा संचालित','Service focused':'सेवा पर केंद्रित','Organised records':'संगठित रिकॉर्ड','Khidmat that brings people ':'लोगों को साथ लाने वाली खिदमत ','together.':'एक साथ।','A community-led foundation focused on practical support for people facing poverty, medical emergencies and difficult circumstances.':'गरीबी, चिकित्सा आपातकाल और कठिन परिस्थितियों का सामना कर रहे लोगों के लिए व्यावहारिक सहायता पर केंद्रित एक समुदाय-आधारित फाउंडेशन।','Explore our work':'हमारे कार्य देखें','Discover the mission':'मिशन जानें','OUR PURPOSE':'हमारा उद्देश्य','ACTIVE':'सक्रिय','Serve with compassion.':'करुणा के साथ सेवा करें।','Manage with responsibility.':'जिम्मेदारी के साथ प्रबंधन करें।','Organised community welfare supported by members and committee leadership.':'सदस्यों और समिति के नेतृत्व द्वारा समर्थित संगठित सामुदायिक कल्याण।','Mission':'मिशन','People':'लोग','Service':'सेवा','KHANDAN KHIDMAT FOUNDATION':'खांदान खिदमत फाउंडेशन','COMMUNITY WELFARE':'सामुदायिक कल्याण','MEDICAL SUPPORT':'चिकित्सा सहायता','ORGANISED SERVICE':'संगठित सेवा',
+    '01 · About':'01 · हमारे बारे में','People first.':'लोग पहले।','Service always.':'सेवा हमेशा।','The foundation brings members together around a simple idea: when people organise, support can reach those who need it most.':'फाउंडेशन एक सरल विचार के साथ सदस्यों को एक साथ लाता है: जब लोग संगठित होते हैं, तो सहायता उन लोगों तक पहुँच सकती है जिन्हें इसकी सबसे अधिक आवश्यकता है।','Community':'समुदाय','Members work together with a shared commitment to welfare, cooperation and brotherhood.':'सदस्य कल्याण, सहयोग और भाईचारे की साझा प्रतिबद्धता के साथ मिलकर काम करते हैं।','Learn more':'और जानें','Medical Support':'चिकित्सा सहायता','Emergency medical needs and genuine hardship can be considered through organised committee decisions.':'आपातकालीन चिकित्सा जरूरतों और वास्तविक कठिनाइयों पर संगठित समिति के निर्णय के माध्यम से विचार किया जा सकता है।','Our activities':'हमारी गतिविधियाँ','Responsibility':'जिम्मेदारी','Committee records, contributions and expenses are intended to be maintained in an organised way.':'समिति के रिकॉर्ड, योगदान और खर्चों को व्यवस्थित तरीके से बनाए रखने का उद्देश्य है।','View records':'रिकॉर्ड देखें',
+    '02 · Our Activities':'02 · हमारी गतिविधियाँ','Support that has a ':'ऐसी सहायता जिसका ','real purpose.':'वास्तविक उद्देश्य है।','The meeting records describe a practical model for helping members and people in need when circumstances require assistance.':'बैठक के रिकॉर्ड जरूरत पड़ने पर सदस्यों और जरूरतमंद लोगों की सहायता के लिए एक व्यावहारिक व्यवस्था बताते हैं।','Emergency Medical Help':'आपातकालीन चिकित्सा सहायता','Support may be considered for urgent medical treatment, emergency illness or related care.':'तत्काल चिकित्सा उपचार, आपातकालीन बीमारी या संबंधित देखभाल के लिए सहायता पर विचार किया जा सकता है।','Essential Assistance':'आवश्यक सहायता','Organised help for genuine hardship and situations where a person or family needs support.':'वास्तविक कठिनाई और ऐसी परिस्थितियों में संगठित सहायता जहाँ किसी व्यक्ति या परिवार को मदद की आवश्यकता हो।','Member Contributions':'सदस्य योगदान',"Members contribute according to the committee's agreed structure and records are maintained.":'सदस्य समिति द्वारा तय संरचना के अनुसार योगदान करते हैं और रिकॉर्ड बनाए रखे जाते हैं।',
+    '03 · Committee':'03 · समिति','A clear structure for ':'बेहतर सेवा के लिए ','better service.':'एक स्पष्ट संरचना।','View committee details ↗':'समिति का विवरण देखें ↗','Leadership & approvals':'नेतृत्व और अनुमोदन','Committee support':'समिति का सहयोग','Records & communication':'रिकॉर्ड और संचार','Administrative support':'प्रशासनिक सहयोग','Financial records':'वित्तीय रिकॉर्ड','Financial support':'वित्तीय सहयोग','Legal guidance':'कानूनी मार्गदर्शन','Directors & Members':'निदेशक और सदस्य','Governance & service':'प्रशासन और सेवा','President':'अध्यक्ष','Vice-President':'उपाध्यक्ष','Secretary':'सचिव','Joint Secretary':'संयुक्त सचिव','Cashier':'कोषाध्यक्ष','Joint Cashier':'संयुक्त कोषाध्यक्ष','Legal Advisor':'कानूनी सलाहकार',
+    '04 · Records':'04 · रिकॉर्ड','Good service needs ':'अच्छी सेवा के लिए ','good records.':'अच्छे रिकॉर्ड जरूरी हैं।','Meeting minutes, committee information and authorised financial records form the administrative foundation of the organisation.':'बैठक की कार्यवाही, समिति की जानकारी और अधिकृत वित्तीय रिकॉर्ड संगठन की प्रशासनिक नींव हैं।','Explore documents':'दस्तावेज़ देखें','Meeting Records':'बैठक के रिकॉर्ड','Organised':'व्यवस्थित','Committee Data':'समिति डेटा','Maintained':'बनाए रखा गया','Financial Data':'वित्तीय डेटा','Authorised':'अधिकृत','Member Access':'सदस्य पहुँच','Optional':'वैकल्पिक',
+    '05 · Contact':'05 · संपर्क','Want to know more?':'और जानना चाहते हैं?','Connect with the foundation for information about its mission, committee or member services.':'मिशन, समिति या सदस्य सेवाओं की जानकारी के लिए फाउंडेशन से संपर्क करें।','FOUNDATION':'फाउंडेशन','Nizamabad, Telangana · Nanded, Maharashtra':'निजामाबाद, तेलंगाना · नांदेड, महाराष्ट्र','Contact us ↗':'संपर्क करें ↗','Information':'जानकारी','Explore':'देखें','Built for community service':'सामुदायिक सेवा के लिए बनाया गया',
+    'About the foundation':'फाउंडेशन के बारे में','Our work':'हमारा कार्य','Our committee':'हमारी समिति','Our documents':'हमारे दस्तावेज़','Get in touch':'संपर्क करें','Contact information':'संपर्क जानकारी','Send us a message':'हमें संदेश भेजें','Name':'नाम','Email':'ईमेल','Message':'संदेश','Send message':'संदेश भेजें','Thank you':'धन्यवाद','Public Website':'सार्वजनिक वेबसाइट','Member Area':'सदस्य क्षेत्र','Sign in':'साइन इन','Login':'लॉगिन','Sign up':'साइन अप','New Member':'नया सदस्य','Create account':'खाता बनाएँ','Full name':'पूरा नाम','Password':'पासवर्ड','Confirm password':'पासवर्ड की पुष्टि करें','Create Member Account':'सदस्य खाता बनाएँ','Private information, simple access.':'निजी जानकारी, आसान पहुँच।','Members can optionally sign in to view their financial summary. Managers have separate access for authorised updates.':'सदस्य अपनी वित्तीय जानकारी देखने के लिए वैकल्पिक रूप से साइन इन कर सकते हैं। प्रबंधकों के पास अधिकृत अपडेट के लिए अलग पहुँच है।','Committee records':'समिति के रिकॉर्ड','Directors':'निदेशक','Members':'सदस्य','Foundation members':'फाउंडेशन के सदस्य','Committee directors':'समिति के निदेशक'
   },
-  mr: {
+  mr:{
     'Home':'मुख्यपृष्ठ','About':'आमच्याबद्दल','Committee':'समिती','Activities':'उपक्रम','Documents':'कागदपत्रे','Contact':'संपर्क','Member Login':'सदस्य लॉगिन','Menu':'मेन्यू','Close':'बंद करा','Settings':'सेटिंग्ज','Language':'भाषा','English':'इंग्रजी','Hindi':'हिंदी','Marathi':'मराठी','Urdu':'उर्दू','Dark':'डार्क','Light':'लाइट',
-    'Community Welfare':'सामुदायिक कल्याण','Medical Support':'वैद्यकीय मदत','Service':'सेवा','Community Welfare · Medical Support · Service':'सामुदायिक कल्याण · वैद्यकीय मदत · सेवा','Organised Service':'संघटित सेवा','People first.':'लोक प्रथम.','Service always.':'सेवा नेहमी.','Our Activities':'आमचे उपक्रम','Our activities':'आमचे उपक्रम','Committee records':'समितीच्या नोंदी','Directors':'संचालक','Members':'सदस्य','Foundation members':'संस्थेचे सदस्य','Committee directors':'समितीचे संचालक','President':'अध्यक्ष','Vice-President':'उपाध्यक्ष','Secretary':'सचिव','Joint Secretary':'सहसचिव','Cashier':'खजिनदार','Joint Cashier':'संयुक्त खजिनदार','Legal Advisor':'कायदेशीर सल्लागार',
-    'Learn more':'अधिक जाणून घ्या','View records':'नोंदी पहा','View committee details':'समितीचा तपशील पहा','Explore documents':'कागदपत्रे पहा','Contact us':'संपर्क करा','Explore our work':'आमचे कार्य पहा','Discover the mission':'उद्दिष्ट जाणून घ्या','Sign in':'साइन इन','Login':'लॉगिन','Sign up':'साइन अप','New Member':'नवीन सदस्य','Create account':'खाते तयार करा','Full name':'पूर्ण नाव','Password':'पासवर्ड','Confirm password':'पासवर्डची पुष्टी करा','Create Member Account':'सदस्य खाते तयार करा','Public Website':'सार्वजनिक वेबसाइट','Member Area':'सदस्य क्षेत्र',
-    'Emergency Medical Help':'आपत्कालीन वैद्यकीय मदत','Essential Assistance':'आवश्यक मदत','Member Contributions':'सदस्यांचे योगदान','Good service needs good records.':'चांगल्या सेवेसाठी चांगल्या नोंदी आवश्यक आहेत.','Our focus':'आमचा केंद्रबिंदू','Our Focus':'आमचा केंद्रबिंदू','Purpose':'उद्देश','purpose.':'उद्देश.','Explore':'पहा','Support where it matters.':'जिथे गरज आहे तिथे मदत.','Serving people with compassion and responsibility.':'करुणा आणि जबाबदारीने लोकांची सेवा.',
-    'Khandan Khidmat Foundation Mission brings members together to support poor, needy and medically distressed people through organised community welfare.':'खांदान खिदमत फाउंडेशन मिशन संघटित सामुदायिक कल्याणाद्वारे गरीब, गरजू आणि वैद्यकीय मदतीची गरज असलेल्या लोकांना मदत करण्यासाठी सदस्यांना एकत्र आणते.','The meeting records describe a practical model for helping members and people in need when circumstances require assistance.':'बैठकीच्या नोंदींमध्ये गरज भासल्यास सदस्य आणि गरजू लोकांना मदत करण्याची व्यावहारिक पद्धत सांगितली आहे.','Support may be considered for urgent medical treatment, emergency illness or related care.':'तातडीच्या वैद्यकीय उपचारांसाठी, आपत्कालीन आजारासाठी किंवा संबंधित उपचारांसाठी मदतीचा विचार केला जाऊ शकतो.','Organised help for genuine hardship and situations where a person or family needs support.':'खऱ्या अडचणीच्या आणि व्यक्ती किंवा कुटुंबाला मदतीची गरज असलेल्या परिस्थितीत संघटित मदत दिली जाते.','Members contribute according to the committee’s agreed purpose.':'सदस्य समितीने ठरवलेल्या उद्देशानुसार योगदान देतात.','Members contribute according to the committee\'s agreed purpose.':'सदस्य समितीने ठरवलेल्या उद्देशानुसार योगदान देतात.',
-    'Leadership, approvals and overall committee responsibility.':'नेतृत्व, मंजुरी आणि समितीची एकूण जबाबदारी.','Supports the President and committee operations.':'अध्यक्ष आणि समितीच्या कामकाजाला सहकार्य करतो.','Records, meetings, communication and administration.':'नोंदी, बैठका, संवाद आणि प्रशासन.','Financial records, collections and authorised payments.':'आर्थिक नोंदी, जमा रक्कम आणि अधिकृत देयके.','Supports financial administration and records.':'आर्थिक प्रशासन आणि नोंदींमध्ये सहकार्य करतो.','Legal guidance and committee matters.':'कायदेशीर मार्गदर्शन आणि समितीशी संबंधित बाबी.',
-    'Mission':'मिशन','Foundation Mission':'फाउंडेशन मिशन','About the foundation':'फाउंडेशनबद्दल','Our work':'आमचे कार्य','Our committee':'आमची समिती','Our documents':'आमची कागदपत्रे','Get in touch':'संपर्क करा','Contact information':'संपर्क माहिती','Send us a message':'आम्हाला संदेश पाठवा','Name':'नाव','Email':'ईमेल','Message':'संदेश','Send message':'संदेश पाठवा','Thank you':'धन्यवाद','Open member login →':'सदस्य लॉगिन उघडा →','Private information, simple access.':'खासगी माहिती, सोपी प्रवेश व्यवस्था.','Members can optionally sign in to view their financial summary. Managers have separate access for authorised updates.':'सदस्य आपला आर्थिक सारांश पाहण्यासाठी ऐच्छिकरित्या साइन इन करू शकतात. अधिकृत अपडेटसाठी व्यवस्थापकांना स्वतंत्र प्रवेश आहे.'
+    'Community Welfare · Medical Support · Service':'सामुदायिक कल्याण · वैद्यकीय मदत · सेवा','Community driven':'समुदायाच्या सहभागातून','Service focused':'सेवाकेंद्रित','Organised records':'व्यवस्थित नोंदी','Khidmat that brings people ':'लोकांना एकत्र आणणारी खिदमत ','together.':'एकत्र.','A community-led foundation focused on practical support for people facing poverty, medical emergencies and difficult circumstances.':'गरिबी, वैद्यकीय आपत्कालीन परिस्थिती आणि अडचणींचा सामना करणाऱ्या लोकांना व्यावहारिक मदत देणारे समुदायाच्या सहभागातून चालणारे फाउंडेशन.','Explore our work':'आमचे कार्य पहा','Discover the mission':'उद्दिष्ट जाणून घ्या','OUR PURPOSE':'आमचा उद्देश','ACTIVE':'सक्रिय','Serve with compassion.':'करुणेने सेवा करा।','Manage with responsibility.':'जबाबदारीने व्यवस्थापन करा।','Organised community welfare supported by members and committee leadership.':'सदस्य आणि समितीच्या नेतृत्वाच्या सहकार्याने संघटित सामुदायिक कल्याण.','Mission':'मिशन','People':'लोक','Service':'सेवा','KHANDAN KHIDMAT FOUNDATION':'खांदान खिदमत फाउंडेशन','COMMUNITY WELFARE':'सामुदायिक कल्याण','MEDICAL SUPPORT':'वैद्यकीय मदत','ORGANISED SERVICE':'संघटित सेवा',
+    '01 · About':'01 · आमच्याबद्दल','People first.':'लोक प्रथम.','Service always.':'सेवा नेहमी.','The foundation brings members together around a simple idea: when people organise, support can reach those who need it most.':'फाउंडेशन एका साध्या विचाराभोवती सदस्यांना एकत्र आणते: लोक संघटित झाले तर मदत ज्यांना सर्वाधिक गरज आहे त्यांच्यापर्यंत पोहोचू शकते.','Community':'समुदाय','Members work together with a shared commitment to welfare, cooperation and brotherhood.':'सदस्य कल्याण, सहकार्य आणि बंधुभावाच्या सामायिक बांधिलकीने एकत्र काम करतात.','Learn more':'अधिक जाणून घ्या','Medical Support':'वैद्यकीय मदत','Emergency medical needs and genuine hardship can be considered through organised committee decisions.':'आपत्कालीन वैद्यकीय गरजा आणि खऱ्या अडचणींचा संघटित समितीच्या निर्णयाद्वारे विचार केला जाऊ शकतो.','Our activities':'आमचे उपक्रम','Responsibility':'जबाबदारी','Committee records, contributions and expenses are intended to be maintained in an organised way.':'समितीच्या नोंदी, योगदान आणि खर्च व्यवस्थित पद्धतीने ठेवण्याचा उद्देश आहे.','View records':'नोंदी पहा',
+    '02 · Our Activities':'02 · आमचे उपक्रम','Support that has a ':'ज्या मदतीला ','real purpose.':'खरा उद्देश आहे.','The meeting records describe a practical model for helping members and people in need when circumstances require assistance.':'बैठकीच्या नोंदींमध्ये गरज भासल्यास सदस्य आणि गरजू लोकांना मदत करण्याची व्यावहारिक पद्धत सांगितली आहे.','Emergency Medical Help':'आपत्कालीन वैद्यकीय मदत','Support may be considered for urgent medical treatment, emergency illness or related care.':'तातडीच्या वैद्यकीय उपचारांसाठी, आपत्कालीन आजारासाठी किंवा संबंधित उपचारांसाठी मदतीचा विचार केला जाऊ शकतो.','Essential Assistance':'आवश्यक मदत','Organised help for genuine hardship and situations where a person or family needs support.':'खऱ्या अडचणीच्या आणि व्यक्ती किंवा कुटुंबाला मदतीची गरज असलेल्या परिस्थितीत संघटित मदत दिली जाते.','Member Contributions':'सदस्यांचे योगदान',"Members contribute according to the committee's agreed structure and records are maintained.":'सदस्य समितीने ठरवलेल्या रचनेनुसार योगदान देतात आणि नोंदी ठेवल्या जातात.',
+    '03 · Committee':'03 · समिती','A clear structure for ':'चांगल्या सेवेसाठी ','better service.':'एक स्पष्ट रचना.','View committee details ↗':'समितीचा तपशील पहा ↗','Leadership & approvals':'नेतृत्व आणि मंजुरी','Committee support':'समितीचे सहकार्य','Records & communication':'नोंदी आणि संवाद','Administrative support':'प्रशासकीय सहकार्य','Financial records':'आर्थिक नोंदी','Financial support':'आर्थिक सहकार्य','Legal guidance':'कायदेशीर मार्गदर्शन','Directors & Members':'संचालक आणि सदस्य','Governance & service':'प्रशासन आणि सेवा','President':'अध्यक्ष','Vice-President':'उपाध्यक्ष','Secretary':'सचिव','Joint Secretary':'सहसचिव','Cashier':'खजिनदार','Joint Cashier':'संयुक्त खजिनदार','Legal Advisor':'कायदेशीर सल्लागार',
+    '04 · Records':'04 · नोंदी','Good service needs ':'चांगल्या सेवेसाठी ','good records.':'चांगल्या नोंदी आवश्यक आहेत.','Meeting minutes, committee information and authorised financial records form the administrative foundation of the organisation.':'बैठकीच्या नोंदी, समितीची माहिती आणि अधिकृत आर्थिक नोंदी संस्थेचा प्रशासकीय पाया आहेत.','Explore documents':'कागदपत्रे पहा','Meeting Records':'बैठकीच्या नोंदी','Organised':'व्यवस्थित','Committee Data':'समिती डेटा','Maintained':'जतन केलेले','Financial Data':'आर्थिक डेटा','Authorised':'अधिकृत','Member Access':'सदस्य प्रवेश','Optional':'ऐच्छिक',
+    '05 · Contact':'05 · संपर्क','Want to know more?':'अधिक जाणून घ्यायचे आहे?','Connect with the foundation for information about its mission, committee or member services.':'मिशन, समिती किंवा सदस्य सेवांबद्दल माहितीसाठी फाउंडेशनशी संपर्क साधा.','FOUNDATION':'फाउंडेशन','Nizamabad, Telangana · Nanded, Maharashtra':'निझामाबाद, तेलंगणा · नांदेड, महाराष्ट्र','Contact us ↗':'संपर्क करा ↗','Information':'माहिती','Explore':'पहा','Built for community service':'सामुदायिक सेवेसाठी तयार केलेले',
+    'About the foundation':'फाउंडेशनबद्दल','Our work':'आमचे कार्य','Our committee':'आमची समिती','Our documents':'आमची कागदपत्रे','Get in touch':'संपर्क करा','Contact information':'संपर्क माहिती','Send us a message':'आम्हाला संदेश पाठवा','Name':'नाव','Email':'ईमेल','Message':'संदेश','Send message':'संदेश पाठवा','Thank you':'धन्यवाद','Public Website':'सार्वजनिक वेबसाइट','Member Area':'सदस्य क्षेत्र','Sign in':'साइन इन','Login':'लॉगिन','Sign up':'साइन अप','New Member':'नवीन सदस्य','Create account':'खाते तयार करा','Full name':'पूर्ण नाव','Password':'पासवर्ड','Confirm password':'पासवर्डची पुष्टी करा','Create Member Account':'सदस्य खाते तयार करा','Private information, simple access.':'खासगी माहिती, सोपी प्रवेश व्यवस्था.','Members can optionally sign in to view their financial summary. Managers have separate access for authorised updates.':'सदस्य आपला आर्थिक सारांश पाहण्यासाठी ऐच्छिकरित्या साइन इन करू शकतात. अधिकृत अपडेटसाठी व्यवस्थापकांना स्वतंत्र प्रवेश आहे.','Committee records':'समितीच्या नोंदी','Directors':'संचालक','Members':'सदस्य','Foundation members':'संस्थेचे सदस्य','Committee directors':'समितीचे संचालक'
   },
-  ur: {
+  ur:{
     'Home':'ہوم','About':'ہمارے بارے میں','Committee':'کمیٹی','Activities':'سرگرمیاں','Documents':'دستاویزات','Contact':'رابطہ','Member Login':'ممبر لاگ اِن','Menu':'مینو','Close':'بند کریں','Settings':'ترتیبات','Language':'زبان','English':'انگریزی','Hindi':'ہندی','Marathi':'مراٹھی','Urdu':'اردو','Dark':'ڈارک','Light':'لائٹ',
-    'Community Welfare':'برادری کی فلاح','Medical Support':'طبی مدد','Service':'خدمت','Community Welfare · Medical Support · Service':'برادری کی فلاح · طبی مدد · خدمت','Organised Service':'منظم خدمت','People first.':'لوگ سب سے پہلے۔','Service always.':'خدمت ہمیشہ۔','Our Activities':'ہماری سرگرمیاں','Our activities':'ہماری سرگرمیاں','Committee records':'کمیٹی ریکارڈ','Directors':'ڈائریکٹرز','Members':'ممبران','Foundation members':'فاؤنڈیشن کے ممبران','Committee directors':'کمیٹی کے ڈائریکٹرز','President':'صدر','Vice-President':'نائب صدر','Secretary':'سیکریٹری','Joint Secretary':'جوائنٹ سیکریٹری','Cashier':'خزانچی','Joint Cashier':'جوائنٹ خزانچی','Legal Advisor':'قانونی مشیر',
-    'Learn more':'مزید جانیں','View records':'ریکارڈ دیکھیں','View committee details':'کمیٹی کی تفصیل دیکھیں','Explore documents':'دستاویزات دیکھیں','Contact us':'رابطہ کریں','Explore our work':'ہمارا کام دیکھیں','Discover the mission':'مشن جانیں','Sign in':'سائن اِن','Login':'لاگ اِن','Sign up':'سائن اَپ','New Member':'نیا ممبر','Create account':'اکاؤنٹ بنائیں','Full name':'پورا نام','Password':'پاس ورڈ','Confirm password':'پاس ورڈ کی تصدیق کریں','Create Member Account':'ممبر اکاؤنٹ بنائیں','Public Website':'عوامی ویب سائٹ','Member Area':'ممبر ایریا',
-    'Emergency Medical Help':'ہنگامی طبی مدد','Essential Assistance':'ضروری مدد','Member Contributions':'ممبران کی شراکت','Good service needs good records.':'اچھی خدمت کے لیے اچھے ریکارڈ ضروری ہیں۔','Our focus':'ہماری توجہ','Our Focus':'ہماری توجہ','Purpose':'مقصد','purpose.':'مقصد۔','Explore':'دیکھیں','Support where it matters.':'جہاں ضرورت ہو وہاں مدد۔','Serving people with compassion and responsibility.':'ہمدردی اور ذمہ داری کے ساتھ لوگوں کی خدمت۔',
-    'Khandan Khidmat Foundation Mission brings members together to support poor, needy and medically distressed people through organised community welfare.':'خاندان خدمت فاؤنڈیشن مشن منظم برادری کی فلاح کے ذریعے غریب، ضرورت مند اور طبی مدد کے محتاج لوگوں کی مدد کے لیے اراکین کو ایک ساتھ لاتا ہے۔','The meeting records describe a practical model for helping members and people in need when circumstances require assistance.':'اجلاس کی ریکارڈنگز ضرورت کے وقت اراکین اور ضرورت مند لوگوں کی مدد کے لیے ایک عملی طریقہ بیان کرتی ہیں۔','Support may be considered for urgent medical treatment, emergency illness or related care.':'فوری طبی علاج، ہنگامی بیماری یا متعلقہ دیکھ بھال کے لیے مدد پر غور کیا جا سکتا ہے۔','Organised help for genuine hardship and situations where a person or family needs support.':'حقیقی مشکل اور ایسی صورتحال میں منظم مدد جہاں کسی شخص یا خاندان کو مدد کی ضرورت ہو۔','Members contribute according to the committee’s agreed purpose.':'اراکین کمیٹی کے طے شدہ مقصد کے مطابق تعاون کرتے ہیں۔','Members contribute according to the committee\'s agreed purpose.':'اراکین کمیٹی کے طے شدہ مقصد کے مطابق تعاون کرتے ہیں۔',
-    'Leadership, approvals and overall committee responsibility.':'قیادت، منظوری اور کمیٹی کی مجموعی ذمہ داری۔','Supports the President and committee operations.':'صدر اور کمیٹی کے امور میں تعاون کرتا ہے۔','Records, meetings, communication and administration.':'ریکارڈ، اجلاس، رابطہ اور انتظامیہ۔','Financial records, collections and authorised payments.':'مالی ریکارڈ، وصولیاں اور مجاز ادائیگیاں۔','Supports financial administration and records.':'مالی انتظام اور ریکارڈ میں تعاون کرتا ہے۔','Legal guidance and committee matters.':'قانونی رہنمائی اور کمیٹی کے معاملات۔',
-    'Mission':'مشن','Foundation Mission':'فاؤنڈیشن مشن','About the foundation':'فاؤنڈیشن کے بارے میں','Our work':'ہمارا کام','Our committee':'ہماری کمیٹی','Our documents':'ہماری دستاویزات','Get in touch':'رابطہ کریں','Contact information':'رابطے کی معلومات','Send us a message':'ہمیں پیغام بھیجیں','Name':'نام','Email':'ای میل','Message':'پیغام','Send message':'پیغام بھیجیں','Thank you':'شکریہ','Open member login →':'ممبر لاگ اِن کھولیں →','Private information, simple access.':'نجی معلومات، آسان رسائی۔','Members can optionally sign in to view their financial summary. Managers have separate access for authorised updates.':'اراکین اپنی مالی معلومات دیکھنے کے لیے اختیاری طور پر سائن اِن کر سکتے ہیں۔ مجاز اپڈیٹس کے لیے مینیجرز کو الگ رسائی حاصل ہے۔'
+    'Community Welfare · Medical Support · Service':'برادری کی فلاح · طبی مدد · خدمت','Community driven':'کمیونٹی کی بنیاد پر','Service focused':'خدمت پر مرکوز','Organised records':'منظم ریکارڈ','Khidmat that brings people ':'لوگوں کو ایک ساتھ لانے والی خدمت ','together.':'ایک ساتھ۔','A community-led foundation focused on practical support for people facing poverty, medical emergencies and difficult circumstances.':'غربت، طبی ہنگامی حالات اور مشکل حالات کا سامنا کرنے والے لوگوں کے لیے عملی مدد پر مرکوز کمیونٹی فاؤنڈیشن۔','Explore our work':'ہمارا کام دیکھیں','Discover the mission':'مشن جانیں','OUR PURPOSE':'ہمارا مقصد','ACTIVE':'فعال','Serve with compassion.':'ہمدردی کے ساتھ خدمت کریں۔','Manage with responsibility.':'ذمہ داری کے ساتھ انتظام کریں۔','Organised community welfare supported by members and committee leadership.':'ممبران اور کمیٹی کی قیادت کے تعاون سے منظم برادری کی فلاح۔','Mission':'مشن','People':'لوگ','Service':'خدمت','KHANDAN KHIDMAT FOUNDATION':'خاندان خدمت فاؤنڈیشن','COMMUNITY WELFARE':'برادری کی فلاح','MEDICAL SUPPORT':'طبی مدد','ORGANISED SERVICE':'منظم خدمت',
+    '01 · About':'01 · ہمارے بارے میں','People first.':'لوگ سب سے پہلے۔','Service always.':'خدمت ہمیشہ۔','The foundation brings members together around a simple idea: when people organise, support can reach those who need it most.':'فاؤنڈیشن ایک سادہ خیال کے تحت ممبران کو اکٹھا کرتی ہے: جب لوگ منظم ہوتے ہیں تو مدد ان لوگوں تک پہنچ سکتی ہے جنہیں اس کی سب سے زیادہ ضرورت ہے۔','Community':'کمیونٹی','Members work together with a shared commitment to welfare, cooperation and brotherhood.':'ممبران فلاح، تعاون اور بھائی چارے کی مشترکہ وابستگی کے ساتھ مل کر کام کرتے ہیں۔','Learn more':'مزید جانیں','Medical Support':'طبی مدد','Emergency medical needs and genuine hardship can be considered through organised committee decisions.':'طبی ہنگامی ضروریات اور حقیقی مشکلات پر منظم کمیٹی کے فیصلوں کے ذریعے غور کیا جا سکتا ہے۔','Our activities':'ہماری سرگرمیاں','Responsibility':'ذمہ داری','Committee records, contributions and expenses are intended to be maintained in an organised way.':'کمیٹی کے ریکارڈ، شراکت اور اخراجات کو منظم طریقے سے برقرار رکھنے کا مقصد ہے۔','View records':'ریکارڈ دیکھیں',
+    '02 · Our Activities':'02 · ہماری سرگرمیاں','Support that has a ':'ایسی مدد جس کا ','real purpose.':'حقیقی مقصد ہو۔','The meeting records describe a practical model for helping members and people in need when circumstances require assistance.':'اجلاس کی ریکارڈنگز ضرورت کے وقت اراکین اور ضرورت مند لوگوں کی مدد کے لیے ایک عملی طریقہ بیان کرتی ہیں۔','Emergency Medical Help':'ہنگامی طبی مدد','Support may be considered for urgent medical treatment, emergency illness or related care.':'فوری طبی علاج، ہنگامی بیماری یا متعلقہ دیکھ بھال کے لیے مدد پر غور کیا جا سکتا ہے۔','Essential Assistance':'ضروری مدد','Organised help for genuine hardship and situations where a person or family needs support.':'حقیقی مشکل اور ایسی صورتحال میں منظم مدد جہاں کسی شخص یا خاندان کو مدد کی ضرورت ہو۔','Member Contributions':'ممبران کی شراکت',"Members contribute according to the committee's agreed structure and records are maintained.":'ممبران کمیٹی کی طے شدہ ساخت کے مطابق شراکت کرتے ہیں اور ریکارڈ برقرار رکھا جاتا ہے۔',
+    '03 · Committee':'03 · کمیٹی','A clear structure for ':'بہتر خدمت کے لیے ','better service.':'ایک واضح ڈھانچہ۔','View committee details ↗':'کمیٹی کی تفصیل دیکھیں ↗','Leadership & approvals':'قیادت اور منظوری','Committee support':'کمیٹی کی معاونت','Records & communication':'ریکارڈ اور رابطہ','Administrative support':'انتظامی معاونت','Financial records':'مالی ریکارڈ','Financial support':'مالی معاونت','Legal guidance':'قانونی رہنمائی','Directors & Members':'ڈائریکٹرز اور ممبران','Governance & service':'انتظام اور خدمت','President':'صدر','Vice-President':'نائب صدر','Secretary':'سیکریٹری','Joint Secretary':'جوائنٹ سیکریٹری','Cashier':'خزانچی','Joint Cashier':'جوائنٹ خزانچی','Legal Advisor':'قانونی مشیر',
+    '04 · Records':'04 · ریکارڈ','Good service needs ':'اچھی خدمت کے لیے ','good records.':'اچھے ریکارڈ ضروری ہیں۔','Meeting minutes, committee information and authorised financial records form the administrative foundation of the organisation.':'اجلاس کی کارروائی، کمیٹی کی معلومات اور مجاز مالی ریکارڈ تنظیم کی انتظامی بنیاد ہیں۔','Explore documents':'دستاویزات دیکھیں','Meeting Records':'اجلاس کے ریکارڈ','Organised':'منظم','Committee Data':'کمیٹی ڈیٹا','Maintained':'برقرار','Financial Data':'مالی ڈیٹا','Authorised':'مجاز','Member Access':'ممبر رسائی','Optional':'اختیاری',
+    '05 · Contact':'05 · رابطہ','Want to know more?':'مزید جاننا چاہتے ہیں؟','Connect with the foundation for information about its mission, committee or member services.':'مشن، کمیٹی یا ممبر سروسز کے بارے میں معلومات کے لیے فاؤنڈیشن سے رابطہ کریں۔','FOUNDATION':'فاؤنڈیشن','Nizamabad, Telangana · Nanded, Maharashtra':'نظام آباد، تلنگانہ · ناندیڑ، مہاراشٹر','Contact us ↗':'رابطہ کریں ↗','Information':'معلومات','Explore':'دیکھیں','Built for community service':'کمیونٹی سروس کے لیے بنایا گیا',
+    'About the foundation':'فاؤنڈیشن کے بارے میں','Our work':'ہمارا کام','Our committee':'ہماری کمیٹی','Our documents':'ہماری دستاویزات','Get in touch':'رابطہ کریں','Contact information':'رابطے کی معلومات','Send us a message':'ہمیں پیغام بھیجیں','Name':'نام','Email':'ای میل','Message':'پیغام','Send message':'پیغام بھیجیں','Thank you':'شکریہ','Public Website':'عوامی ویب سائٹ','Member Area':'ممبر ایریا','Sign in':'سائن اِن','Login':'لاگ اِن','Sign up':'سائن اَپ','New Member':'نیا ممبر','Create account':'اکاؤنٹ بنائیں','Full name':'پورا نام','Password':'پاس ورڈ','Confirm password':'پاس ورڈ کی تصدیق کریں','Create Member Account':'ممبر اکاؤنٹ بنائیں','Private information, simple access.':'نجی معلومات، آسان رسائی۔','Members can optionally sign in to view their financial summary. Managers have separate access for authorised updates.':'ممبران اپنی مالی معلومات دیکھنے کے لیے اختیاری طور پر سائن اِن کر سکتے ہیں۔ مجاز اپڈیٹس کے لیے مینیجرز کو الگ رسائی حاصل ہے۔','Committee records':'کمیٹی ریکارڈ','Directors':'ڈائریکٹرز','Members':'ممبران','Foundation members':'فاؤنڈیشن کے ممبران','Committee directors':'کمیٹی کے ڈائریکٹرز'
   }
 };
 
-const sourceText = new WeakMap();
-const sourceAttributes = new WeakMap();
-let sourceTitle = '';
+const sourceText=new WeakMap();
+const sourceAttrs=new WeakMap();
+let sourceTitle='';
 
-function currentLanguage(){
-  const saved = localStorage.getItem(LANG_KEY);
-  return I18N[saved] ? saved : 'en';
+function currentLanguage(){const s=localStorage.getItem(LANG_KEY);return I18N[s]?s:'en';}
+function dict(){return I18N[currentLanguage()]||{};}
+function normal(s){return(s||'').replace(/\s+/g,' ').trim();}
+function translateString(value,map){
+ if(!value||!map)return value;
+ const trimmed=normal(value);
+ if(map[value]!==undefined)return map[value];
+ if(map[trimmed]!==undefined){
+  const start=value.indexOf(trimmed);return value.slice(0,start)+map[trimmed]+value.slice(start+trimmed.length);
+ }
+ let out=value;
+ Object.keys(map).sort((a,b)=>b.length-a.length).forEach(k=>{if(k&&out.includes(k))out=out.split(k).join(map[k]);});
+ return out;
 }
-
-function t(value){
-  const lang = currentLanguage();
-  return I18N[lang]?.[value] || value;
+function captureSources(){
+ if(!document.body)return;
+ const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ while(walker.nextNode()){const n=walker.currentNode;if(!sourceText.has(n))sourceText.set(n,n.nodeValue);}
+ document.querySelectorAll('[placeholder],[aria-label],[title],[alt]').forEach(el=>{if(!sourceAttrs.has(el)){const a={};['placeholder','aria-label','title','alt'].forEach(x=>{if(el.hasAttribute(x))a[x]=el.getAttribute(x);});sourceAttrs.set(el,a);}});
+ if(!sourceTitle)sourceTitle=document.title;
 }
-
-function translateValue(value, dict){
-  if (!value || !dict) return value;
-  const keys = Object.keys(dict).sort((a,b)=>b.length-a.length);
-  let output = value;
-  for (const key of keys) {
-    if (output.includes(key)) output = output.split(key).join(dict[key]);
-  }
-  return output;
+function updateUI(){
+ const lang=currentLanguage(),d=dict();
+ const select=document.getElementById('languageSelect');if(select)select.value=lang;
+ const label=document.getElementById('languageLabel');if(label)label.textContent=d.Language||'Language';
+ const settings=document.getElementById('settingsToggle');if(settings)settings.textContent='⚙ '+(d.Settings||'Settings');
+ const menu=document.getElementById('menuToggle'),nav=document.getElementById('siteNav');if(menu&&!nav?.classList.contains('open'))menu.textContent='☰ '+(d.Menu||'Menu');
+ document.querySelectorAll('.theme-toggle').forEach(b=>b.textContent=document.documentElement.classList.contains('dark')?'☀ '+(d.Light||'Light'):'☾ '+(d.Dark||'Dark'));
 }
-
-function collectTranslationSources(){
-  if (!document.body) return;
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-  while (walker.nextNode()) {
-    const node = walker.currentNode;
-    if (!sourceText.has(node)) sourceText.set(node, node.nodeValue);
-  }
-  document.querySelectorAll('[placeholder],[aria-label],[title],[alt]').forEach(el=>{
-    if (!sourceAttributes.has(el)) {
-      const attrs = {};
-      ['placeholder','aria-label','title','alt'].forEach(name=>{
-        if (el.hasAttribute(name)) attrs[name] = el.getAttribute(name);
-      });
-      sourceAttributes.set(el, attrs);
-    }
-  });
-  if (!sourceTitle) sourceTitle = document.title;
-}
-
-function updateLanguageUI(lang){
-  const select = document.getElementById('languageSelect');
-  if (select) select.value = lang;
-  const label = document.getElementById('languageLabel');
-  if (label) label.textContent = t('Language');
-  const settings = document.getElementById('settingsToggle');
-  if (settings) settings.textContent = '⚙ ' + t('Settings');
-  const menu = document.getElementById('menuToggle');
-  if (menu && !document.getElementById('siteNav')?.classList.contains('open')) menu.textContent = '☰ ' + t('Menu');
-  document.querySelectorAll('.theme-toggle').forEach(button=>{
-    const dark = document.documentElement.classList.contains('dark');
-    button.textContent = dark ? '☀ ' + t('Light') : '☾ ' + t('Dark');
-  });
-}
-
 function translatePage(){
-  collectTranslationSources();
-  const lang = currentLanguage();
-  const dict = I18N[lang];
-  document.documentElement.lang = lang === 'ur' ? 'ur' : lang;
-  document.documentElement.dir = lang === 'ur' ? 'rtl' : 'ltr';
-
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-  while (walker.nextNode()) {
-    const node = walker.currentNode;
-    if (node.parentElement?.closest('#languagePanel')) continue;
-    const original = sourceText.get(node);
-    if (original == null) continue;
-    node.nodeValue = lang === 'en' ? original : translateValue(original, dict);
-  }
-
-  document.querySelectorAll('[placeholder],[aria-label],[title],[alt]').forEach(el=>{
-    const originals = sourceAttributes.get(el);
-    if (!originals) return;
-    Object.entries(originals).forEach(([name, original])=>{
-      el.setAttribute(name, lang === 'en' ? original : translateValue(original, dict));
-    });
-  });
-
-  document.title = lang === 'en' ? sourceTitle : translateValue(sourceTitle, dict);
-  updateLanguageUI(lang);
+ captureSources();const lang=currentLanguage(),d=dict();
+ document.documentElement.lang=lang==='ur'?'ur':lang;document.documentElement.dir=lang==='ur'?'rtl':'ltr';
+ const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ while(walker.nextNode()){const n=walker.currentNode;if(n.parentElement?.closest('#languagePanel'))continue;const original=sourceText.get(n);if(original==null)continue;n.nodeValue=lang==='en'?original:translateString(original,d);}
+ document.querySelectorAll('[placeholder],[aria-label],[title],[alt]').forEach(el=>{const a=sourceAttrs.get(el);if(!a)return;Object.entries(a).forEach(([name,v])=>el.setAttribute(name,lang==='en'?v:translateString(v,d)));});
+ document.title=lang==='en'?sourceTitle:translateString(sourceTitle,d);updateUI();
 }
-
-function applyTheme(theme){
-  const safe = theme === 'dark' ? 'dark' : 'light';
-  document.documentElement.classList.toggle('dark', safe === 'dark');
-  localStorage.setItem(THEME_KEY, safe);
-  updateLanguageUI(currentLanguage());
+function applyTheme(theme){const safe=theme==='dark'?'dark':'light';document.documentElement.classList.toggle('dark',safe==='dark');localStorage.setItem(THEME_KEY,safe);updateUI();}
+function injectSettings(){
+ if(document.getElementById('kkfLanguageStyle'))return;
+ const style=document.createElement('style');style.id='kkfLanguageStyle';style.textContent='.settings-toggle{border:1px solid var(--line);background:var(--surface);color:var(--text);padding:10px 11px;border-radius:11px;cursor:pointer;white-space:nowrap;margin-left:4px}.language-panel{position:absolute;right:18px;top:calc(100% + 8px);z-index:300;min-width:210px;padding:14px;border:1px solid var(--line);border-radius:16px;background:var(--surface);box-shadow:var(--shadow)}.language-panel label{display:block;color:var(--muted);font-size:.75rem;font-weight:800;margin-bottom:7px}.language-panel select{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);font:inherit}@media(max-width:1020px){.settings-toggle{width:100%;text-align:left;margin-left:0;padding:13px 15px}.language-panel{position:static;margin:4px 0 6px;width:100%;box-shadow:none}.language-panel select{padding:12px}}';document.head.appendChild(style);
 }
-
-function injectSettingsStyle(){
-  if (document.getElementById('kkfLanguageStyle')) return;
-  const style = document.createElement('style');
-  style.id = 'kkfLanguageStyle';
-  style.textContent = `.settings-toggle{border:1px solid var(--line);background:var(--surface);color:var(--text);padding:10px 11px;border-radius:11px;cursor:pointer;white-space:nowrap;margin-left:4px}.settings-toggle:hover{background:var(--surface2)}.language-panel{position:absolute;right:18px;top:calc(100% + 8px);z-index:200;min-width:210px;padding:14px;border:1px solid var(--line);border-radius:16px;background:var(--surface);box-shadow:var(--shadow)}.language-panel label{display:block;color:var(--muted);font-size:.75rem;font-weight:800;margin-bottom:7px}.language-panel select{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);font:inherit}.nav{position:relative}@media(max-width:1020px){.settings-toggle{width:100%;text-align:left;margin-left:0;padding:13px 15px}.language-panel{position:static;margin:4px 0 6px;width:100%;box-shadow:none}.language-panel select{padding:12px}}`;
-  document.head.appendChild(style);
-}
-
 function ensureSettings(){
-  const nav = document.getElementById('siteNav');
-  if (!nav || document.getElementById('settingsToggle')) return;
-  injectSettingsStyle();
-
-  const button = document.createElement('button');
-  button.className = 'settings-toggle';
-  button.id = 'settingsToggle';
-  button.type = 'button';
-  button.textContent = '⚙ Settings';
-
-  const panel = document.createElement('div');
-  panel.className = 'language-panel';
-  panel.id = 'languagePanel';
-  panel.hidden = true;
-  panel.innerHTML = '<label id="languageLabel" for="languageSelect">Language</label><select id="languageSelect" aria-label="Language"><option value="en">English</option><option value="hi">हिंदी</option><option value="mr">मराठी</option><option value="ur">اردو</option></select>';
-
-  button.addEventListener('click', e=>{ e.stopPropagation(); panel.hidden = !panel.hidden; });
-  panel.addEventListener('click', e=>e.stopPropagation());
-  panel.querySelector('#languageSelect').addEventListener('change', e=>{
-    localStorage.setItem(LANG_KEY, e.target.value);
-    translatePage();
-    panel.hidden = true;
-  });
-
-  nav.appendChild(button);
-  nav.appendChild(panel);
-  panel.querySelector('#languageSelect').value = currentLanguage();
+ const nav=document.getElementById('siteNav');if(!nav||document.getElementById('settingsToggle'))return;injectSettings();
+ const b=document.createElement('button');b.className='settings-toggle';b.id='settingsToggle';b.type='button';b.textContent='⚙ Settings';
+ const p=document.createElement('div');p.className='language-panel';p.id='languagePanel';p.hidden=true;p.innerHTML='<label id="languageLabel" for="languageSelect">Language</label><select id="languageSelect"><option value="en">English</option><option value="hi">हिंदी</option><option value="mr">मराठी</option><option value="ur">اردو</option></select>';
+ b.addEventListener('click',e=>{e.stopPropagation();p.hidden=!p.hidden;});p.addEventListener('click',e=>e.stopPropagation());
+ p.querySelector('#languageSelect').addEventListener('change',e=>{localStorage.setItem(LANG_KEY,e.target.value);translatePage();p.hidden=true;});nav.appendChild(b);nav.appendChild(p);p.querySelector('#languageSelect').value=currentLanguage();
 }
-
-function closeMenu(){
-  const nav = document.getElementById('siteNav');
-  const menu = document.getElementById('menuToggle');
-  if (!nav) return;
-  nav.classList.remove('open');
-  if (menu) { menu.setAttribute('aria-expanded','false'); menu.textContent = '☰ ' + t('Menu'); }
-}
-
+function closeMenu(){const nav=document.getElementById('siteNav'),menu=document.getElementById('menuToggle');if(!nav)return;nav.classList.remove('open');if(menu){menu.setAttribute('aria-expanded','false');menu.textContent='☰ '+(dict().Menu||'Menu');}}
 function initMenu(){
-  const menu = document.getElementById('menuToggle');
-  const nav = document.getElementById('siteNav');
-  if (!menu || !nav || menu.dataset.kkfReady === '1') return;
-  menu.dataset.kkfReady = '1';
-  menu.addEventListener('click', e=>{
-    e.stopPropagation();
-    const open = nav.classList.toggle('open');
-    menu.setAttribute('aria-expanded', String(open));
-    menu.textContent = open ? '✕ ' + t('Close') : '☰ ' + t('Menu');
-  });
-  nav.addEventListener('click', e=>{ if (e.target.closest('a')) closeMenu(); });
-  document.addEventListener('click', e=>{ if (nav.classList.contains('open') && !nav.contains(e.target) && !menu.contains(e.target)) closeMenu(); });
-  document.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeMenu(); });
-  window.addEventListener('resize', ()=>{ if(window.innerWidth > 1020) closeMenu(); });
+ const menu=document.getElementById('menuToggle'),nav=document.getElementById('siteNav');if(!menu||!nav||menu.dataset.kkfReady)return;menu.dataset.kkfReady='1';
+ menu.addEventListener('click',e=>{e.stopPropagation();const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'✕ '+(dict().Close||'Close'):'☰ '+(dict().Menu||'Menu');});
+ nav.addEventListener('click',e=>{if(e.target.closest('a'))closeMenu();});document.addEventListener('click',e=>{if(nav.classList.contains('open')&&!nav.contains(e.target)&&!menu.contains(e.target))closeMenu();});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});window.addEventListener('resize',()=>{if(window.innerWidth>1020)closeMenu();});
 }
+function initTheme(){applyTheme(localStorage.getItem(THEME_KEY)==='dark'?'dark':'light');document.querySelectorAll('.theme-toggle').forEach(b=>{if(b.dataset.kkfReady)return;b.dataset.kkfReady='1';b.addEventListener('click',()=>applyTheme(document.documentElement.classList.contains('dark')?'light':'dark'));});}
 
-function initTheme(){
-  const saved = localStorage.getItem(THEME_KEY);
-  applyTheme(saved === 'dark' ? 'dark' : 'light');
-  document.querySelectorAll('.theme-toggle').forEach(button=>{
-    if (button.dataset.kkfThemeReady === '1') return;
-    button.dataset.kkfThemeReady = '1';
-    button.addEventListener('click', ()=>applyTheme(document.documentElement.classList.contains('dark') ? 'light' : 'dark'));
-  });
-}
-
-document.addEventListener('DOMContentLoaded', ()=>{
-  /* Capture the real English DOM before adding any dynamic translated controls. */
-  collectTranslationSources();
-  initTheme();
-  initMenu();
-  ensureSettings();
-  collectTranslationSources();
-  translatePage();
-});
+document.addEventListener('DOMContentLoaded',()=>{captureSources();initTheme();initMenu();ensureSettings();captureSources();translatePage();});
