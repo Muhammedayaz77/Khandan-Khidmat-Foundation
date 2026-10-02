@@ -19,6 +19,9 @@ app.include_router(content.router)
 
 web_root = Path(__file__).resolve().parent.parent
 app.mount("/assets", StaticFiles(directory=web_root / "Assets"), name="assets")
+app.mount("/auth", StaticFiles(directory=web_root / "View" / "Auth", html=True), name="auth-pages")
+app.mount("/member", StaticFiles(directory=web_root / "View" / "Member", html=True), name="member-pages")
+app.mount("/manager", StaticFiles(directory=web_root / "View" / "Manager", html=True), name="manager-pages")
 app.mount("/", StaticFiles(directory=web_root / "View" / "Public", html=True), name="public")
 
 @app.get("/api/health")
