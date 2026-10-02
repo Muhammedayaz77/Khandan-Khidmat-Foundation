@@ -43,9 +43,7 @@ function currentUser(){
 }
 
 function escapeHTML(value){
-  return String(value??'').replace(/[&<>'"]/g,char=>({
-    '&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'
-  }[char]));
+  return String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
 }
 
 function positiveAmount(value){
@@ -61,14 +59,49 @@ async function login(){
   try{
     const data=await loadDemoData();
     const all=[...(data.users.members||[]),...(data.users.managers||[])];
-    const user=all.find(u=>u.active&&u.name.toLowerCase()===name.toLowerCase()&&password===demoPassword(u.name));
-    if(!user)throw new Error('Invalid demo login');
+    const user=all.find(u=>u.active&&u.name.toLowerCase()===name.toLowerCase()&&(password===(u.password||demoPassword(u.name))));
+    if(!user)throw new Error('Invalid login details');
     localStorage.setItem(USER_KEY,JSON.stringify(user));
     location.href=user.role==='manager'?'demo-manager.html':'demo-member.html';
   }catch(e){error.textContent=e.message||'Login failed';}
 }
 
 function logout(){localStorage.removeItem(USER_KEY);location.href='demo-login.html';}
+
+function toggleSignup(){
+  const panel=document.querySelector('#signupPanel');
+  if(!panel)return;
+  const open=panel.hidden;
+  panel.hidden=!open;
+  if(open)document.querySelector('#signupName')?.focus();
+}
+
+async function signup(){
+  const name=(document.querySelector('#signupName')?.value||'').trim();
+  const password=document.querySelector('#signupPassword')?.value||'';
+  const confirm=document.querySelector('#signupConfirm')?.value||'';
+  const error=document.querySelector('#signupError');
+  const success=document.querySelector('#signupSuccess');
+  if(error)error.textContent='';
+  if(success)success.textContent='';
+  if(name.length<2){if(error)error.textContent='Please enter your name.';return;}
+  if(password.length<4){if(error)error.textContent='Password must be at least 4 characters.';return;}
+  if(password!==confirm){if(error)error.textContent='Passwords do not match.';return;}
+  try{
+    const data=await loadDemoData();
+    data.users.members=data.users.members||[];
+    const all=[...(data.users.members||[]),...(data.users.managers||[])];
+    if(all.some(u=>u.name.toLowerCase()===name.toLowerCase())){if(error)error.textContent='An account with this name already exists.';return;}
+    const maxId=data.users.members.reduce((max,u)=>Math.max(max,parseInt(String(u.id).replace(/\D/g,''),10)||0),0);
+    const id='M'+String(maxId+1).padStart(3,'0');
+    data.users.members.push({id,name,password,role:'member',active:true});
+    saveDemoData(data);
+    document.querySelector('#signupName').value='';
+    document.querySelector('#signupPassword').value='';
+    document.querySelector('#signupConfirm').value='';
+    if(success)success.textContent='Account created. You can now sign in.';
+  }catch(e){if(error)error.textContent=e.message||'Sign up failed';}
+}
 
 async function addDemoMember(){
   const input=document.querySelector('#new-member-name');
@@ -77,10 +110,7 @@ async function addDemoMember(){
   if(!name){if(error)error.textContent='Enter a member name.';return;}
   const data=await loadDemoData();
   const all=[...(data.users.members||[]),...(data.users.managers||[])];
-  if(all.some(u=>u.name.toLowerCase()===name.toLowerCase())){
-    if(error)error.textContent='This name already exists.';
-    return;
-  }
+  if(all.some(u=>u.name.toLowerCase()===name.toLowerCase())){if(error)error.textContent='This name already exists.';return;}
   const maxId=data.users.members.reduce((max,u)=>Math.max(max,parseInt(String(u.id).replace(/\D/g,''),10)||0),0);
   const id='M'+String(maxId+1).padStart(3,'0');
   data.users.members.push({id,name,role:'member',active:true});
