@@ -1,1 +1,38 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Member / Manager Login | Khandan Khidmat Foundation</title><link rel="stylesheet" href="static-test/styles.css"><script src="static-test/app.js"></script></head><body><header class="top"><div class="container bar"><a class="brand" href="index.html"><span class="logo">♥</span>Khandan Khidmat Foundation</a><div class="nav"><button class="theme" onclick="toggleTheme()">☀ / ☾</button><a class="btn alt" href="web/View/Public/index.html">Public Website</a></div></div></header><main class="container"><section class="panel form"><span class="eyebrow">Optional Demo Access</span><h1>Sign in</h1><p>Use one of the demo Member or Manager accounts. Password format is the account name followed by @123.</p><label>Name</label><input id="name" autocomplete="username" placeholder="Member One"><label>Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Member One@123"><button onclick="login()">Login</button><p id="error" class="error"></p><div class="notice"><strong>Demo only:</strong> credentials are stored in JSON for testing and are not secure for real accounts.</div></section></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Optional member and manager demo login for Khandan Khidmat Foundation Mission.">
+<title>Member / Manager Login | Khandan Khidmat Foundation</title>
+<link rel="stylesheet" href="static-test/styles.css">
+<script src="static-test/app.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="container bar">
+    <a class="brand" href="index.html" aria-label="Khandan Khidmat Foundation home">
+      <span class="logo">K</span>Khandan Khidmat Foundation
+    </a>
+    <div class="nav">
+      <button class="theme" type="button" onclick="toggleTheme()">☀ / ☾</button>
+      <a class="btn alt" href="index.html">Public Website</a>
+    </div>
+  </div>
+</header>
+<main class="container">
+  <section class="panel form">
+    <span class="eyebrow">Optional Demo Access</span>
+    <h1>Sign in</h1>
+    <p>Use one of the demo Member or Manager accounts. Password format is the account name followed by @123.</p>
+    <label for="name">Name</label>
+    <input id="name" autocomplete="username" placeholder="Member One">
+    <label for="password">Password</label>
+    <input id="password" type="password" autocomplete="current-password" placeholder="Member One@123">
+    <button type="button" onclick="login()">Login</button>
+    <p id="error" class="error" role="alert"></p>
+    <div class="notice"><strong>Demo only:</strong> credentials are stored in JSON for testing and are not secure for real accounts.</div>
+  </section>
+</main>
+</body>
+</html>
