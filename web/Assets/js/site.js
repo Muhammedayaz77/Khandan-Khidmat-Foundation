@@ -9,60 +9,10 @@ ur:{'Home':'ہوم','About':'ہمارے بارے میں','Committee':'کمیٹی
 
 function t(value){const lang=localStorage.getItem(LANG_KEY)||'en';return I18N[lang]?.[value]||value;}
 function applyTheme(theme){document.documentElement.classList.toggle('dark',theme==='dark');localStorage.setItem(THEME_KEY,theme);const b=document.getElementById('themeToggle');if(b)b.textContent=theme==='dark'?'☀ '+t('Light'):'☾ '+t('Dark');}
-
-function translateTitle(title,lang){
- const map={hi:{'Committee | Khandan Khidmat Foundation':'समिति | खांदान खिदमत फाउंडेशन','Member / Manager Login | Khandan Khidmat Foundation':'सदस्य / मैनेजर लॉगिन | खांदान खिदमत फाउंडेशन'},mr:{'Committee | Khandan Khidmat Foundation':'समिती | खांदान खिदमत फाउंडेशन','Member / Manager Login | Khandan Khidmat Foundation':'सदस्य / मॅनेजर लॉगिन | खांदान खिदमत फाउंडेशन'},ur:{'Committee | Khandan Khidmat Foundation':'کمیٹی | خاندان خدمت فاؤنڈیشن','Member / Manager Login | Khandan Khidmat Foundation':'ممبر / مینیجر لاگ اِن | خاندان خدمت فاؤنڈیشن'}};
- return map[lang]?.[title]||title;
-}
-
-function updateLanguageUI(lang){
- const select=document.getElementById('languageSelect');if(select)select.value=lang;
- const label=document.getElementById('languageLabel');if(label)label.textContent=t('Language');
- const settings=document.getElementById('settingsToggle');if(settings)settings.textContent='⚙ '+t('Settings');
- const menu=document.getElementById('menuToggle');if(menu&&!document.getElementById('siteNav')?.classList.contains('open'))menu.textContent='☰ '+t('Menu');
-}
-
-function translatePage(){
- const lang=localStorage.getItem(LANG_KEY)||'en';
- if(lang==='en'){document.documentElement.lang='en';document.documentElement.dir='ltr';updateLanguageUI(lang);return;}
- const dict=I18N[lang]||{};
- document.documentElement.lang=lang==='ur'?'ur':lang;
- document.documentElement.dir=lang==='ur'?'rtl':'ltr';
- const keys=Object.keys(dict).sort((a,b)=>b.length-a.length);
- const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
- const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
- nodes.forEach(node=>{
-  if(node.parentElement?.closest('#languagePanel'))return;
-  let value=node.nodeValue;
-  keys.forEach(key=>{if(value.includes(key))value=value.split(key).join(dict[key]);});
-  node.nodeValue=value;
- });
- document.title=translateTitle(document.title,lang);
- updateLanguageUI(lang);
-}
-
-function ensureSettings(){
- const nav=document.getElementById('siteNav');if(!nav||document.getElementById('settingsToggle'))return;
- const button=document.createElement('button');button.className='settings-toggle';button.id='settingsToggle';button.type='button';button.textContent='⚙ '+t('Settings');
- const panel=document.createElement('div');panel.className='language-panel';panel.id='languagePanel';panel.hidden=true;
- panel.innerHTML='<label id="languageLabel" for="languageSelect">'+t('Language')+'</label><select id="languageSelect"><option value="en">English</option><option value="hi">हिंदी</option><option value="mr">मराठी</option><option value="ur">اردو</option></select>';
- button.addEventListener('click',()=>{panel.hidden=!panel.hidden;});
- panel.querySelector('select').addEventListener('change',e=>{localStorage.setItem(LANG_KEY,e.target.value);location.reload();});
- nav.appendChild(button);nav.appendChild(panel);
-}
-
-function initSite(){
- ensureSettings();
- const saved=localStorage.getItem(THEME_KEY);applyTheme(saved==='dark'?'dark':'light');
- translatePage();
- const toggle=document.getElementById('themeToggle');if(toggle)toggle.addEventListener('click',()=>applyTheme(document.documentElement.classList.contains('dark')?'light':'dark'));
- const menu=document.getElementById('menuToggle');const nav=document.getElementById('siteNav');
- if(menu&&nav){
-  menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'✕ '+t('Close'):'☰ '+t('Menu');});
-  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='☰ '+t('Menu');}));
- }
- const links=[...document.querySelectorAll('#siteNav a[href^="#"]')];
- const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
- if(sections.length&&links.length){const setActive=()=>{let current=sections[0].id;sections.forEach(s=>{if(window.scrollY+130>=s.offsetTop)current=s.id;});links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current));};window.addEventListener('scroll',setActive,{passive:true});setActive();}
-}
+function translateTitle(title,lang){const map={hi:{'Committee | Khandan Khidmat Foundation':'समिति | खांदान खिदमत फाउंडेशन','Member / Manager Login | Khandan Khidmat Foundation':'सदस्य / मैनेजर लॉगिन | खांदान खिदमत फाउंडेशन'},mr:{'Committee | Khandan Khidmat Foundation':'समिती | खांदान खिदमत फाउंडेशन','Member / Manager Login | Khandan Khidmat Foundation':'सदस्य / मॅनेजर लॉगिन | खांदान खिदमत फाउंडेशन'},ur:{'Committee | Khandan Khidmat Foundation':'کمیٹی | خاندان خدمت فاؤنڈیشن','Member / Manager Login | Khandan Khidmat Foundation':'ممبر / مینیجر لاگ اِن | خاندان خدمت فاؤنڈیشن'}};return map[lang]?.[title]||title;}
+function updateLanguageUI(lang){const select=document.getElementById('languageSelect');if(select)select.value=lang;const label=document.getElementById('languageLabel');if(label)label.textContent=t('Language');const settings=document.getElementById('settingsToggle');if(settings)settings.textContent='⚙ '+t('Settings');const menu=document.getElementById('menuToggle');if(menu&&!document.getElementById('siteNav')?.classList.contains('open'))menu.textContent='☰ '+t('Menu');}
+function translatePage(){const lang=localStorage.getItem(LANG_KEY)||'en';if(lang==='en'){document.documentElement.lang='en';document.documentElement.dir='ltr';updateLanguageUI(lang);return;}const dict=I18N[lang]||{};document.documentElement.lang=lang==='ur'?'ur':lang;document.documentElement.dir=lang==='ur'?'rtl':'ltr';const keys=Object.keys(dict).sort((a,b)=>b.length-a.length);const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);nodes.forEach(node=>{if(node.parentElement?.closest('#languagePanel'))return;let value=node.nodeValue;keys.forEach(key=>{if(value.includes(key))value=value.split(key).join(dict[key]);});node.nodeValue=value;});document.title=translateTitle(document.title,lang);updateLanguageUI(lang);}
+function injectSettingsStyle(){if(document.getElementById('kkfLanguageStyle'))return;const style=document.createElement('style');style.id='kkfLanguageStyle';style.textContent='.settings-toggle{border:1px solid var(--line);background:var(--surface);color:var(--text);padding:10px 11px;border-radius:11px;cursor:pointer;white-space:nowrap;margin-left:4px}.settings-toggle:hover{background:var(--surface2)}.language-panel{position:absolute;right:18px;top:calc(100% + 8px);z-index:200;min-width:190px;padding:14px;border:1px solid var(--line);border-radius:16px;background:var(--surface);box-shadow:var(--shadow)}.language-panel label{display:block;color:var(--muted);font-size:.75rem;font-weight:800;margin-bottom:7px}.language-panel select{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);font:inherit}.nav{position:relative}@media(max-width:1020px){.settings-toggle{width:100%;text-align:left;margin-left:0;padding:13px 15px}.language-panel{position:static;margin:4px 0 6px;width:100%;box-shadow:none}.language-panel select{padding:12px}}';document.head.appendChild(style);}
+function ensureSettings(){const nav=document.getElementById('siteNav');if(!nav||document.getElementById('settingsToggle'))return;injectSettingsStyle();const button=document.createElement('button');button.className='settings-toggle';button.id='settingsToggle';button.type='button';button.textContent='⚙ '+t('Settings');const panel=document.createElement('div');panel.className='language-panel';panel.id='languagePanel';panel.hidden=true;panel.innerHTML='<label id="languageLabel" for="languageSelect">'+t('Language')+'</label><select id="languageSelect"><option value="en">English</option><option value="hi">हिंदी</option><option value="mr">मराठी</option><option value="ur">اردو</option></select>';button.addEventListener('click',()=>{panel.hidden=!panel.hidden;});panel.querySelector('select').addEventListener('change',e=>{localStorage.setItem(LANG_KEY,e.target.value);location.reload();});nav.appendChild(button);nav.appendChild(panel);}
+function initSite(){ensureSettings();const saved=localStorage.getItem(THEME_KEY);applyTheme(saved==='dark'?'dark':'light');translatePage();const toggle=document.getElementById('themeToggle');if(toggle)toggle.addEventListener('click',()=>applyTheme(document.documentElement.classList.contains('dark')?'light':'dark'));const menu=document.getElementById('menuToggle');const nav=document.getElementById('siteNav');if(menu&&nav){menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'✕ '+t('Close'):'☰ '+t('Menu');});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='☰ '+t('Menu');}));}const links=[...document.querySelectorAll('#siteNav a[href^="#"]')];const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);if(sections.length&&links.length){const setActive=()=>{let current=sections[0].id;sections.forEach(s=>{if(window.scrollY+130>=s.offsetTop)current=s.id;});links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current));};window.addEventListener('scroll',setActive,{passive:true});setActive();}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initSite);else initSite();
