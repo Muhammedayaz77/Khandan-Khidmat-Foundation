@@ -1,15 +1,54 @@
 # Khandan Khidmat Foundation Mission
 
-Official website project for Khandan Khidmat Foundation Mission.
+Website and member-management system for Khandan Khidmat Foundation Mission.
 
-## Website scope
-- Foundation introduction and objectives
-- Committee structure
-- Welfare and medical assistance activities
-- Official documents and meeting records
-- Contact information
+## V1 scope
+- Public foundation website
+- Member and Manager login
+- Member dashboard with collection, expense and balance visibility
+- Manager dashboard for member management
+- Manager controls for income/collection and expense entries
+- Controlled content management API
+- SQLite for local development
+- MySQL-compatible production database configuration
 
-Personal member phone numbers and contribution amounts from internal meeting documents are not published publicly unless officially approved.
+## Project structure
+
+```text
+web/
+├── Backend/
+│   ├── main.py
+│   ├── config.py
+│   ├── database.py
+│   ├── models.py
+│   ├── schemas.py
+│   ├── security.py
+│   ├── dependencies.py
+│   └── routers/
+├── View/
+│   ├── Public/
+│   ├── Auth/
+│   ├── Member/
+│   └── Manager/
+├── Assets/
+│   ├── css/
+│   └── js/
+├── .env.example
+└── requirements.txt
+```
+
+## Roles
+
+### Member
+Can sign in and view authorised financial summaries and transaction records.
+
+### Manager
+Can sign in, add/manage members, record income/collection, record expenses and update controlled content.
+
+## Security notes
+- No real credentials are committed to GitHub.
+- Set a strong `JWT_SECRET` and manager credentials in the deployment environment.
+- Private member phone numbers and other sensitive internal information are not published on public pages.
 
 ## Development
-The website is being completed on GitHub first. Live deployment will happen only after final approval.
+GitHub is the source of truth for V1. Live deployment will happen only after the GitHub version is reviewed and approved.
