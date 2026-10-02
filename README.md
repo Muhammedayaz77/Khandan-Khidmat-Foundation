@@ -1,54 +1,45 @@
 # Khandan Khidmat Foundation Mission
 
-Website and member-management system for Khandan Khidmat Foundation Mission.
+Public, static GitHub Pages website for Khandan Khidmat Foundation Mission.
 
-## V1 scope
-- Public foundation website
-- Member and Manager login
-- Member dashboard with collection, expense and balance visibility
-- Manager dashboard for member management
-- Manager controls for income/collection and expense entries
-- Controlled content management API
-- SQLite for local development
-- MySQL-compatible production database configuration
+## V1 Static Test
+- Public website is open to everyone.
+- Member login is optional.
+- Member dashboard shows demo collection, expenses and balance.
+- Manager dashboard is available for testing member and finance management screens.
+- Demo users and finance data are stored in JSON for static GitHub Pages testing.
+- No database or hosting backend is required for this V1 preview.
 
-## Project structure
+## GitHub Pages Preview
 
-```text
-web/
-├── Backend/
-│   ├── main.py
-│   ├── config.py
-│   ├── database.py
-│   ├── models.py
-│   ├── schemas.py
-│   ├── security.py
-│   ├── dependencies.py
-│   └── routers/
-├── View/
-│   ├── Public/
-│   ├── Auth/
-│   ├── Member/
-│   └── Manager/
-├── Assets/
-│   ├── css/
-│   └── js/
-├── .env.example
-└── requirements.txt
-```
+Public website entry point:
 
-## Roles
+`web/View/Public/index.html`
 
-### Member
-Can sign in and view authorised financial summaries and transaction records.
+The repository root `index.html` redirects visitors to the public website.
 
-### Manager
-Can sign in, add/manage members, record income/collection, record expenses and update controlled content.
+## Website Sections
 
-## Security notes
-- No real credentials are committed to GitHub.
-- Set a strong `JWT_SECRET` and manager credentials in the deployment environment.
-- Private member phone numbers and other sensitive internal information are not published on public pages.
+- Home
+- About Foundation
+- Committee
+- Activities
+- Documents
+- Contact
+- Optional Member/Manager Login
+- Member Dashboard
+- Manager Dashboard
+
+## Theme
+
+The website uses the foundation's medical-green visual direction with Light and Dark modes. The theme should remain consistent across public pages, login and dashboards.
+
+## Demo Authentication
+
+This is a static prototype only. Demo credentials are stored in JSON for testing and must never be used for real accounts or sensitive information.
+
+Production authentication, database storage and secure server-side authorization will be added only when the static V1 UI is approved.
 
 ## Development
-GitHub is the source of truth for V1. Live deployment will happen only after the GitHub version is reviewed and approved.
+
+GitHub is the source of truth for the V1 static preview. Live/backend deployment is intentionally postponed until the UI and user flows are reviewed.
