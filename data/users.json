@@ -1,0 +1,13 @@
+{
+  "members": [
+    { "id": "M001", "name": "Member One", "role": "member", "active": true },
+    { "id": "M002", "name": "Member Two", "role": "member", "active": true },
+    { "id": "M003", "name": "Member Three", "role": "member", "active": true },
+    { "id": "M004", "name": "Member Four", "role": "member", "active": true },
+    { "id": "M005", "name": "Member Five", "role": "member", "active": true }
+  ],
+  "managers": [
+    { "id": "MG001", "name": "Manager One", "role": "manager", "active": true },
+    { "id": "MG002", "name": "Manager Two", "role": "manager", "active": true }
+  ]
+}
