@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Optional member and manager demo login for Khandan Khidmat Foundation Mission.">
+<meta name="description" content="Optional member and manager login for Khandan Khidmat Foundation Mission.">
 <title>Member / Manager Login | Khandan Khidmat Foundation</title>
-<link rel="stylesheet" href="static-test/styles.css">
-<script src="static-test/app.js"></script>
+<link rel="stylesheet" href="static-test/styles.css?v=20261002-2">
+<script src="static-test/app.js?v=20261002-2"></script>
 </head>
 <body>
 <header class="top">
@@ -22,16 +22,33 @@
 </header>
 <main class="container">
   <section class="panel form">
-    <span class="eyebrow">Optional Demo Access</span>
+    <span class="eyebrow">Member Area</span>
     <h1>Sign in</h1>
-    <p>Use one of the demo Member or Manager accounts. Password format is the account name followed by @123.</p>
+    <p>Members can view their financial summary. Managers can access authorised management controls.</p>
     <label for="name">Name</label>
     <input id="name" autocomplete="username" placeholder="Member One">
     <label for="password">Password</label>
-    <input id="password" type="password" autocomplete="current-password" placeholder="Member One@123">
+    <input id="password" type="password" autocomplete="current-password" placeholder="Password">
     <button type="button" onclick="login()">Login</button>
     <p id="error" class="error" role="alert"></p>
-    <div class="notice"><strong>Demo only:</strong> credentials are stored in JSON for testing and are not secure for real accounts.</div>
+    <div class="notice"><strong>New member?</strong> You can create a demo member account below. In this static V1, the account is saved only in this browser.</div>
+    <button class="btn alt" type="button" onclick="toggleSignup()">Sign up</button>
+  </section>
+
+  <section class="panel form" id="signupPanel" hidden>
+    <span class="eyebrow">New Member</span>
+    <h2>Create account</h2>
+    <p>Create a member account for this browser-based V1 demo.</p>
+    <label for="signupName">Full name</label>
+    <input id="signupName" autocomplete="name" placeholder="Your name">
+    <label for="signupPassword">Password</label>
+    <input id="signupPassword" type="password" autocomplete="new-password" placeholder="Choose a password">
+    <label for="signupConfirm">Confirm password</label>
+    <input id="signupConfirm" type="password" autocomplete="new-password" placeholder="Repeat password">
+    <button type="button" onclick="signup()">Create Member Account</button>
+    <p id="signupError" class="error" role="alert"></p>
+    <p id="signupSuccess" class="success" role="status"></p>
+    <div class="notice"><strong>Demo only:</strong> browser storage is not a secure production database. A real version should use a backend and proper password hashing.</div>
   </section>
 </main>
 </body>
